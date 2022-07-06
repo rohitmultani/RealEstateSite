@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { styled, alpha } from '@mui/material/styles';
 import classes from './Styles.module.css'
 import SearchIcon from '@mui/icons-material/Search';
+import { autocompleteClasses } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -61,7 +62,7 @@ const SearchProperties=()=> {
     
       <Toolbar variant="dense" sx={{m:'auto'}}>
         
-        <Typography variant="h4" color="inherit" component="div" sx={{p:6}}>
+        <Typography variant="h4" color="inherit" component="div" sx={{p:'auto',m:'auto',pb:4,pt:4}}>
           Search Properties To Rent
         </Typography>
         <Typography variant="h5" color="inherit" component="div" >

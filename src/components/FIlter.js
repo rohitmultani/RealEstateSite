@@ -5,7 +5,6 @@ import DropDownMenu from "./DropDownMenu";
 import Button from '@mui/material/Button';
 import classes from './Styles.module.css';
 const Filter=()=>{
-
     return(
         <Fragment>
             <Box className={classes.filter}
@@ -25,16 +24,16 @@ const Filter=()=>{
           },
           '& hr': {
             mx: 0.5,
-          },
+          },    
         }}
       >
-        <DropDownMenu/>
+        <DropDownMenu name={"Bathrooms"} val={['1','2','3']}/>
+        <Divider orientation="vertical" variant="middle" flexItem  />
+        <DropDownMenu name={"Bedrooms"} val={['1','2','3','4']}/>
         <Divider orientation="vertical" variant="middle" flexItem />
-        <DropDownMenu/>
+        <DropDownMenu name={"Price"} val={['100-150','150-200','200-250','250-300','300-350','350-400','400-500','500-600']}/>
         <Divider orientation="vertical" variant="middle" flexItem />
-        <DropDownMenu/>
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <DropDownMenu/>
+        <DropDownMenu name={"Type"} val={['Flat','Terraced house','End terrace house','Semi-detached house']}/>
         <Divider orientation="vertical" variant="middle" flexItem />
         <Button variant="contained" sx={{p:2}}>Search</Button>
       </Box>
