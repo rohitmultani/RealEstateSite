@@ -4,7 +4,15 @@ import Divider from '@mui/material/Divider';
 import DropDownMenu from "./DropDownMenu";
 import Button from '@mui/material/Button';
 import classes from './Styles.module.css';
+import { useDispatch,useSelector } from "react-redux";
+import { resetState } from "../Utils/Store";
 const Filter=()=>{
+  const dispatch = useDispatch();
+  const data = useSelector((state=>state.Notes))
+  const reset=()=>{
+    
+dispatch(resetState(!data.reset)); 
+  }
     return(
         <Fragment>
             <Box className={classes.filter}
@@ -35,7 +43,7 @@ const Filter=()=>{
         <Divider orientation="vertical" variant="middle" flexItem />
         <DropDownMenu name={"Type"} val={['Flat','Terraced house','End terrace house','Semi-detached house']}/>
         <Divider orientation="vertical" variant="middle" flexItem />
-        <Button variant="contained" sx={{p:2}}>Search</Button>
+        <Button variant="contained" sx={{p:2}} onClick={reset}>Reset</Button>
       </Box>
         </Fragment>
     )

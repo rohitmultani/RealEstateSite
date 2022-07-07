@@ -2,21 +2,36 @@ import { configureStore } from '@reduxjs/toolkit';
 const { createSlice } = require('@reduxjs/toolkit');
 const noteSlice = createSlice({
     name: 'Notes',
-    initialState:{},
+    initialState:{data:0,name:0,reset:false},
     reducers: {
-        upDate(state, action) {
+        upDateData(state, action) {
             // state.push(action.payload);
-        state[0]=action.payload;
+        state.data=action.payload;
+        
      // state.isEdit=!state.isEdit
         },
+        upDateName(state,action){
+            state.name=action.payload
+        },
+        resetState(state,action){
+            state.reset=action.payload;
+        }
         
     },
 });
+const dataSlice=createSlice({
+    name: 'Data',
+    initialState:{},
+    reducers:{
+        upDate(state, action) {
+            // state.push(action.payload);
+        state.data=action.payload;
+   } }})
 const store = configureStore({
 
-    reducer: noteSlice.reducer,
+    reducer: {Notes:noteSlice.reducer,Data:dataSlice.reducer},
 
 });
-export const { upDate } = noteSlice.actions;
-
+export const { upDateData,upDateName,resetState } = noteSlice.actions;
+export const { upDate } =dataSlice.actions;
 export default store;

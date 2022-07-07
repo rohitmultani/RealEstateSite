@@ -1,23 +1,32 @@
 import * as React from 'react';
+import {useState,useEffect,memo} from 'react'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useDispatch } from 'react-redux';
-import { upDate } from '../Utils/Store';
+import { useDispatch,useSelector } from 'react-redux';
+import { upDateName } from '../Utils/Store';
+import { upDateData } from '../Utils/Store';
 
 const DropDownMenu=(props)=> {
   const dispatch = useDispatch();
-  const [age, setAge] = React.useState('');
+  const data = useSelector((state=>state.Notes))
+  const [age, setAge] = useState('');
   const handleChange = (event) => {
-    setAge(event.target.value);
     console.log(event.target.value)
-    dispatch(upDate(event.target.value));
+    setAge(event.target.value);
+    dispatch(upDateData(event.target.value));
+    dispatch(upDateName(props.name));
     // console.log(age)
   };
-  const dispatchItem =(item)=>{
-
+  useEffect(()=>{
+    dispatch(upDateData(0))
+    dispatch(upDateName(0))
+    setAge('')
+  },[data.reset])
+  const closeHandler=(event)=>{
+    setAge('');
 }
   return (
     <Box sx={{ minWidth: 140 }}>
@@ -29,18 +38,16 @@ const DropDownMenu=(props)=> {
           value={age}
           label={`${props.name}`}
           onChange={handleChange}
+          onBlur={closeHandler}
         >
           {props.val.map((item)=>
           
-          <MenuItem  key={item} value={item} onClick={dispatchItem(item)}> {item}</MenuItem>
+          <MenuItem  key={item} value={item} > {item}</MenuItem>
           )}
-          {/* <MenuItem value={2}>{props.val[1]}</MenuItem> */}
-          {/* <MenuItem value={3}>{props.val[2]}</MenuItem> */}
-          {/* <MenuItem value={4}>{props.val[3]}</MenuItem>  */}
         </Select>
       </FormControl>
       
     </Box>
   );
 }
-export default DropDownMenu;
+export default memo(DropDownMenu);

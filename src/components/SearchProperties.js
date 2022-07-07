@@ -1,14 +1,14 @@
 import * as React from 'react';
 import InputBase from '@mui/material/InputBase';
-import MuiGrid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { styled, alpha } from '@mui/material/styles';
 import classes from './Styles.module.css'
 import SearchIcon from '@mui/icons-material/Search';
-import { autocompleteClasses } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { upDateName } from '../Utils/Store';
+import { upDateData } from '../Utils/Store';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -52,9 +52,15 @@ const Search = styled('div')(({ theme }) => ({
   }));
   
   
-
-const SearchProperties=()=> {
-  
+  const SearchProperties=()=> {
+    
+    const dispatch = useDispatch();
+    const searchHandler=(e)=>{
+    console.log(e.target.value)
+    dispatch(upDateData(e.target.value));
+    dispatch(upDateName('Search'));
+    
+  }
 
   return (
     <React.Fragment>
@@ -73,6 +79,7 @@ const SearchProperties=()=> {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={searchHandler}
             />
           </Search> 
   
